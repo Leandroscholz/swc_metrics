@@ -9,8 +9,7 @@ example calls:
 ```
 python3 swc_utils_parallel.py -f 'OP_1_app1_fixed.swc' -g 'OP_1.swc' 
 ```
-
-    using specific tolerance and computing specific metric
+using specific tolerance and computing specific metric
 
 ```
 python3 swc_utils_parallel.py -f 'OP_1_app1_fixed.swc' -g 'OP_1.swc' -tol 2.5 2.5 3 -m 'precision'
