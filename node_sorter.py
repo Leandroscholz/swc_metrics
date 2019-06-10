@@ -82,7 +82,7 @@ def findchildren(swc, parent_id):
 
 
 
-def swc_node_sorter(swc_file_path):
+def swc_node_sorter(swc_file_path, save_output = True):
 
     swc = np.loadtxt(swc_file_path)
     new_swc = np.empty(swc.shape)
@@ -121,7 +121,11 @@ def swc_node_sorter(swc_file_path):
                 new_swc[row_counter,:] = swc[children_idx_list[i],:]
                 row_counter += 1
     print(new_swc)
-    np.savetxt(swc_file_path[:-4]+'_fixed.swc', new_swc, fmt='%i %i %.2f %.2f %.2f %.2f %i', delimiter=' ')
+
+    if save_output:
+        np.savetxt(swc_file_path[:-4]+'_fixed.swc', new_swc, fmt='%i %i %.2f %.2f %.2f %.2f %i', delimiter=' ')
+    else: 
+        return new_swc
 
 if __name__ == '__main__':
     import argparse
@@ -129,7 +133,9 @@ if __name__ == '__main__':
     # argument parser
     ap  = argparse.ArgumentParser()
     ap.add_argument("-f", "--file_path", required = True, help = "Path to image file")
+    ap.add_argument("-s", "--save_swc",required = False, help = "Save output swc as *_fixed.swc",
+                    type=bool, default = False)
     args = vars(ap.parse_args())
 
     # run swc_node_sorter 
-    swc_node_sorter(args['file_path']) 
+    swc_node_sorter(args['file_path'],save_output = args['save_swc']) 
